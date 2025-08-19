@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt- BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="mensagem">Faça login no bagulho ai</p>
+    <input type="text" id="palavra" placeholder="digita o login no bagulho">
+    <input type="password" id="senha" placeholder="coloca a senha aí"> 
+        <button onclick="VerificarPalavra()">Verificar</button>
+        <script>
+            function VerificarPalavra() {
+                const palavras = [{login:"Caio20",senha:"1234"},{login:"Thiago18",senha:"345"},{login:"Rick11", senha:"GT23"}];
+           const imput = document.getElementById("palavra").value;
+           const senha = document.getElementById("senha").value;
+           const mensagem = document.getElementById("mensagem");
+           let encontrado = false;
+           for (let i = 0;i< palavras.length;i++){
+            if (imput === palavras[i].login && senha === palavras[i].senha){
+                encontrado = true;
+                mensagem.innerHTML = "acerto ze"
+            }
+           }
+            
+    
+    if(!encontrado){
+    mensagem.innerHTML = "Tá errado o bagulho ai";
+     }
+    }
+     </script>
+</body>
+</html>
