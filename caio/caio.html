@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt- BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/">
+
+</head>
+
+<body>
+    <p id="mensagem">Faça login no bagulho ai</p>
+    <input type="text" id="palavra" placeholder="digita o login no bagulho">
+    <input type="password" id="senha" placeholder="coloca a senha aqui ó">
+    <button onclick="VerificarPalavra()">Verificar</button>
+
+    <script defer>
+        function VerificarPalavra() {
+            const palavras = [{ login: "Caio20", senha: "1234" }];
+            const imput = document.getElementById("palavra").value;
+            const senha = document.getElementById("senha").value;
+            const mensagem = document.getElementById("mensagem");
+            let encontrado = false;
+
+            console.log("Login: ", imput);
+            console.log("Senha: ", senha);
+
+            for (let i = 0; i < palavras.length; i++) {
+                if (imput === palavras[i].login && senha === palavras[i].senha) {
+                    mensagem.innerHTML = "acerto ze";
+                    encontrado = true;
+                      setTimeout(() => {
+                     mensagem.innerHTML = "Será que você está cadastrado?"; 
+                     } ,3000);
+                    break;
+                   }
+            }
+
+            if (!encontrado) {
+            }
+            document.getElementById("palavra").value = "";
+            document.getElementById("senha").value = "";
+        }
+
+    </script>
+</body>
+
+</html>
