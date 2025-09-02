@@ -1,19 +1,106 @@
 <!DOCTYPE html>
-<html lang="pt- BR">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #aa2222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .login-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #D32F2F;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        p {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            background-color: #fafafa;
+        }
+
+        input:focus {
+            border-color: #D32F2F;
+            outline: none;
+            background-color: #fff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #D32F2F;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #C2185B;
+        }
+
+        #mensagem {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+     
+        .login-container {
+            border: 2px solid #000;
+        }
+
+        .login-container h1 {
+            color: #000; 
+        }
+    </style>
 </head>
 
 <body>
-    <p id="mensagem">Faça login no bagulho ai</p>
-    <input type="text" id="palavra" placeholder="digita o login no bagulho">
-    <input type="password" id="senha" placeholder="coloca a senha aqui ó">
-    <button onclick="VerificarPalavra()">Verificar</button>
+    <div class="login-container">
+        <h1>Login</h1>
+        <p id="mensagem">Qual é o passe?</p>
+        <input type="text" id="palavra" placeholder="Digite o login no bagulho">
+        <input type="password" id="senha" placeholder="Coloca a senha aqui ó">
+        <button onclick="VerificarPalavra()">Verificar</button>
+    </div>
 
     <script defer>
         function VerificarPalavra() {
@@ -22,27 +109,28 @@
             const senha = document.getElementById("senha").value;
             const mensagem = document.getElementById("mensagem");
             let encontrado = false;
-
             console.log("Login: ", imput);
             console.log("Senha: ", senha);
 
             for (let i = 0; i < palavras.length; i++) {
                 if (imput === palavras[i].login && senha === palavras[i].senha) {
-                    mensagem.innerHTML = "acerto ze";
+                    mensagem.innerHTML = "Acerto, pia!";
                     encontrado = true;
-                      setTimeout(() => {
-                     mensagem.innerHTML = "Será que você está cadastrado?"; 
-                     } ,3000);
-                    break;
-                   }
+                    setTimeout(() => {
+                        mensagem.innerHTML = "Será que você está cadastrado?";
+                        window.location.href ="caio2.html";
+                    }, 2000);
+                }
             }
 
             if (!encontrado) {
+                mensagem.innerHTML = "Login ou senha incorretos!";
+                mensagem.style.color = "#C2185B";
             }
+
             document.getElementById("palavra").value = "";
             document.getElementById("senha").value = "";
         }
-
     </script>
 </body>
 
