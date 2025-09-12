@@ -1,137 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #aa2222;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
-            width: 300px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #D32F2F;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        p {
-            color: #333;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-            color: #333;
-        }
-
-        input[type="text"], input[type="password"] {
-            background-color: #fafafa;
-        }
-
-        input:focus {
-            border-color: #D32F2F;
-            outline: none;
-            background-color: #fff;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #D32F2F;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #C2185B;
-        }
-
-        #mensagem {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #333;
-        }
-
-     
-        .login-container {
-            border: 2px solid #000;
-        }
-
-        .login-container h1 {
-            color: #000; 
-        }
-    </style>
-</head>
-
+<html>
 <body>
-    <div class="login-container">
-        <h1>Login</h1>
-        <p id="mensagem">Qual é o passe?</p>
-        <input type="text" id="palavra" placeholder="Digite o login no bagulho">
-        <input type="password" id="senha" placeholder="Coloca a senha aqui ó">
-        <button onclick="VerificarPalavra()">Verificar</button>
-    </div>
+    <h1 id="titulo"> Bem vindo(a)!</h1>
+    <p>Clique no botão para mudar a cor da pagina de acordo com o horario atual.</p>
+    <button onclick="trocar()">Mudar cor</button>
 
-    <script defer>
-        function VerificarPalavra() {
-            const palavras = [{ login: "Caio20", senha: "1234" }];
-            const imput = document.getElementById("palavra").value;
-            const senha = document.getElementById("senha").value;
-            const mensagem = document.getElementById("mensagem");
-            let encontrado = false;
-            console.log("Login: ", imput);
-            console.log("Senha: ", senha);
 
-            for (let i = 0; i < palavras.length; i++) {
-                if (imput === palavras[i].login && senha === palavras[i].senha) {
-                    mensagem.innerHTML = "Acerto, pia!";
-                    encontrado = true;
-                    setTimeout(() => {
-                        mensagem.innerHTML = "Será que você está cadastrado?";
-                        window.location.href ="caio2.html";
-                    }, 2000);
-                }
+    <p id="hora"></p>
+    <p id="data"></p>
+
+    <script>
+        function trocar() {
+            const agora = new Date();
+            const hora = agora.getHours();
+            const minutos = agora.getMinutes().toString().padStart(2, "0");
+            const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let cor;
+            let mensagem;
+
+            if(hora >= 6 && hora < 12) {
+                cor = "#FFD700";
+                mensagem = "Bom dia!☀️";
+            } else if (hora >=12 && hora < 18) {
+                cor = "#FF8C00";
+                mensagem = "Boa tarde!🌤️";
+            } else if (hora >= 18 && hora < 23) {
+                cor = "#1E90FF";
+                mensagem = "Boa noite!🌔";
+            } else {
+                cor = "#2F4F4F";
+                mensagem = "Hora de descansar!🌑";
             }
 
-            if (!encontrado) {
-                mensagem.innerHTML = "Login ou senha incorretos!";
-                mensagem.style.color = "#C2185B";
-            }
+            document.body.style.backgroundColor = cor;
+            document.getElementById("titulo").innerHTML = mensagem;
 
-            document.getElementById("palavra").value = "";
-            document.getElementById("senha").value = "";
+            
+            document.getElementById("hora").innerText = `Hora atual: ${hora}:${minutos}`;
+            document.getElementById("data").innerText = agora.toLocaleDateString("pt-BR", opcoes);
         }
     </script>
-</body>
 
+    <style>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        @media(max-width: 768px){
+            body{ font-size: 35px; padding-top: 50px;}
+            button{ font-size:14px; padding: 8px 16px;}
+        }
+        body {
+            margin: 200px;
+            justify-content: center;
+        }
+        container{
+            text-align: center;
+            padding: 50px;
+            border-radius: 20px;
+        }
+    </style>
+</body>
 </html>
