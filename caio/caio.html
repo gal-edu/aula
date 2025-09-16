@@ -1,67 +1,126 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horário e Data</title>
+</head>
+
 <body>
-    <h1 id="titulo"> Bem vindo(a)!</h1>
-    <p>Clique no botão para mudar a cor da pagina de acordo com o horario atual.</p>
-    <button onclick="trocar()">Mudar cor</button>
-
-
-    <p id="hora"></p>
-    <p id="data"></p>
+    <div class="container">
+        <p id="titulo"></p>
+        <p id="hora"></p>
+        <p id="data"></p>
+        <p id="frases"></p>
+    </div>
 
     <script>
-        function trocar() {
+        let frases = [];
+
+        function atualizarHoraData() {
             const agora = new Date();
             const hora = agora.getHours();
             const minutos = agora.getMinutes().toString().padStart(2, "0");
+            const segundos = agora.getSeconds().toString().padStart(2,"0");
             const opcoes = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             let cor;
             let mensagem;
 
-            if(hora >= 6 && hora < 12) {
-                cor = "#FFD700";
-                mensagem = "Bom dia!☀️";
-            } else if (hora >=12 && hora < 18) {
-                cor = "#FF8C00";
-                mensagem = "Boa tarde!🌤️";
+            if (hora >= 6 && hora < 12) {
+                cor = "#FFD700"; 
+                mensagem = "Bom dia! ☀️";
+                frases = [
+                    "Vamo acordar.",
+                    "Anda logo seu fudido.",
+                    "Levantou?? AN HEIN??"
+                ];
+            } else if (hora >= 12 && hora < 18) {
+                cor = "#FF8C00"; 
+                frases = [
+                    "VAMOS ALMOÇAR???",
+                    "Agora só uma sonequinha né.",
+                    "Tá bo ja deu já."
+                ];
+                mensagem = "Boa tarde! 🌤️";
             } else if (hora >= 18 && hora < 23) {
-                cor = "#1E90FF";
-                mensagem = "Boa noite!🌔";
+               cor = "#00008B";
+               mensagem = "Boa noite! 🌔";
+               frases = [ 
+                    "Agora é janta né, ninguem é de ferro.",
+                    "receba.",
+                    "vai tomar um banho, seu fudido."
+                ];
             } else {
                 cor = "#2F4F4F";
-                mensagem = "Hora de descansar!🌑";
+                mensagem = "Hora de descansar! 🌑";
+                frases = [
+                    "hora de teitar né.",
+                    "ja ta bom por hoje.",
+                    "japacama."
+                ];
             }
 
             document.body.style.backgroundColor = cor;
             document.getElementById("titulo").innerHTML = mensagem;
-
-            
-            document.getElementById("hora").innerText = `Hora atual: ${hora}:${minutos}`;
+            document.getElementById("hora").innerText = `Hora atual: ${hora}:${minutos}:${segundos}`;
             document.getElementById("data").innerText = agora.toLocaleDateString("pt-BR", opcoes);
         }
+
+        function trocarFrase() {
+            if (frases.length > 0) {
+                const FraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+                document.getElementById("frases").innerHTML = FraseAleatoria;
+            }
+        }
+        setInterval(atualizarHoraData, 1000);
+        setInterval(trocarFrase, 5000);
+
+   
+        atualizarHoraData();
+        trocarFrase();
     </script>
 
     <style>
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-top: 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-        }
-        @media(max-width: 768px){
-            body{ font-size: 35px; padding-top: 50px;}
-            button{ font-size:14px; padding: 8px 16px;}
-        }
         body {
-            margin: 200px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
         }
-        container{
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
             text-align: center;
-            padding: 50px;
-            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        #titulo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        #hora {
+            font-size: 1.8em;
+        }
+
+        #data {
+            font-size: 1.2em;
         }
     </style>
 </body>
+
 </html>
