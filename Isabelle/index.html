@@ -1,0 +1,89 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+   
+    <style>
+
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Classe do formulário */
+.formulario {
+    background: #f50a9b56;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+
+    /* 🔥 Animação de entrada horizontal */
+    transform: translateX(-400px);
+    animation: slideIn 3s forwards;
+}
+
+/* Campos */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Keyframes da animação */
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
+    
+}  
+input[type="submit"] {
+    width: auto;           /* Remove os 100% */
+    padding: 10px 20px;
+    display: block;
+    margin: 15px auto 0;   /* Centraliza */
+    background: #0e1d53;
+    color: white;
+    border: none;
+    cursor: pointer;
+}      
+    </style>
+
+</head>
+
+<body>
+<div class="formulario">
+    <h1>Cadastro</h1>
+     <form  onsubmit="return validar()">
+     <label>login:</label><br>
+    <input type="text" name="usuario" id="usuario" required><br>
+
+    <label>Senha:</label><br>
+    <input type="password" name="password" id="password" required><br>
+
+     <button type="submit" value="Enviar">enviar</button>
+ </form>   
+</div>
+<script src="script.js"></script>
+</body>
+</html>
